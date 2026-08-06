@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Details - Dforms803</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
+        
+        header { background-color: #1a365d; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { font-size: 26px; color: #63b3ed; }
+        nav { background-color: #2b6cb0; padding: 12px 20px; }
+        nav a { color: white; text-decoration: none; margin-right: 20px; font-weight: bold; }
+
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        .post-title { font-size: 24px; color: #1a365d; margin-bottom: 10px; border-bottom: 2px solid #3182ce; padding-bottom: 8px; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px; margin-top: 20px; }
+        .info-box { background: #f7fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 6px; }
+        .info-box h3 { color: #2c5282; margin-bottom: 10px; font-size: 16px; border-bottom: 1px solid #cbd5e0; padding-bottom: 5px; }
+        .info-box ul { list-style: none; font-size: 14px; }
+        .info-box li { margin-bottom: 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 25px; }
+        table, th, td { border: 1px solid #cbd5e0; }
+        th, td { padding: 10px; text-align: left; font-size: 14px; }
+        th { background-color: #ebf8ff; color: #2c5282; }
+
+        .btn-apply { display: inline-block; background-color: #38a169; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .btn-apply:hover { background-color: #2f855a; }
+        
+        footer { text-align: center; padding: 20px; margin-top: 40px; background: #1a365d; color: white; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dforms803</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">← Back to Home</a>
+    </nav>
+
+    <div class="container" id="detailsContainer">
+        <h2 id="postTitle" class="post-title">Loading Details...</h2>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Important Dates</h3>
+                <ul>
+                    <li><strong>Application Start:</strong> <span id="startDate">-</span></li>
+                    <li><strong>Last Date to Apply:</strong> <span id="lastDate">-</span></li>
+                    <li><strong>Exam Date:</strong> <span id="examDate">-</span></li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>Application Fee</h3>
+                <ul>
+                    <li><strong>General / OBC / EWS:</strong> <span id="feeGen">-</span></li>
+                    <li><strong>SC / ST / Female:</strong> <span id="feeSc">-</span></li>
+                    <li><strong>Payment Mode:</strong> <span id="payMode">Online</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <h3 style="color: #2c5282; margin-bottom: 10px;">Age Limit & Qualification</h3>
+        <table>
+            <tr>
+                <th>Age Limit</th>
+                <th>Qualification Required</th>
+            </tr>
+            <tr>
+                <td id="ageLimit">-</td>
+                <td id="qualification">-</td>
+            </tr>
+        </table>
+
+        <h3 style="color: #2c5282; margin-bottom: 10px;">Important Links</h3>
+        <table>
+            <tr>
+                <th>Link Description</th>
+                <th>Action Link</th>
+            </tr>
+            <tr>
+                <td><strong>Apply Online</strong></td>
+                <td><a href="#" id="applyLink" target="_blank" class="btn-apply">Click Here</a></td>
+            </tr>
+            <tr id="notifRow">
+                <td>Download Official Notification</td>
+                <td><a href="#" id="notifLink" target="_blank" style="color: #3182ce; font-weight: bold;">Download PDF</a></td>
+            </tr>
+            <tr id="officialRow">
+                <td>Official Website</td>
+                <td><a href="#" id="officialLink" target="_blank" style="color: #3182ce; font-weight: bold;">Visit Official Site</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+        <p>© 2026 Dforms803. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            const posts = JSON.parse(localStorage.getItem('dforms_posts')) || [];
+            
+            const post = posts.find(p => p.id == postId);
+            
+            if (post) {
+                document.title = post.title + " - Dforms803";
+                document.getElementById('postTitle').innerText = post.title;
+                document.getElementById('startDate').innerText = post.startDate || "Notify Soon";
+                document.getElementById('lastDate').innerText = post.lastDate || "Notify Soon";
+                document.getElementById('examDate').innerText = post.examDate || "Notify Soon";
+                
+                document.getElementById('feeGen').innerText = post.feeGen || "₹0";
+                document.getElementById('feeSc').innerText = post.feeSc || "₹0";
+                document.getElementById('payMode').innerText = post.payMode || "Online";
+                
+                document.getElementById('ageLimit').innerText = post.ageLimit || "As per rules";
+                document.getElementById('qualification').innerText = post.qualification || "Specified in Official Notice";
+                
+                document.getElementById('applyLink').href = post.applyLink || "#";
+                
+                if (post.notifLink) {
+                    document.getElementById('notifLink').href = post.notifLink;
+                } else {
+                    document.getElementById('notifRow').style.display = 'none';
+                }
+
+                if (post.officialLink) {
+                    document.getElementById('officialLink').href = post.officialLink;
+                } else {
+                    document.getElementById('officialRow').style.display = 'none';
+                }
+            } else {
+                document.getElementById('detailsContainer').innerHTML = '<h2>Post Not Found!</h2><p><a href="index.html">Back to Homepage</a></p>';
+            }
+        };
+    </script>
+</body>
+</html>

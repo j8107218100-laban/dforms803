@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dforms803 - Latest Online Forms & Notifications</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; }
+        
+        header { background-color: #1a365d; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        header h1 { font-size: 26px; color: #63b3ed; letter-spacing: 1px; }
+        
+        .search-bar { display: flex; gap: 8px; margin-top: 10px; }
+        .search-bar input { padding: 8px 12px; border-radius: 4px; border: 1px solid #ccc; width: 220px; }
+        .search-bar button { padding: 8px 15px; border-radius: 4px; border: none; background-color: #3182ce; color: white; cursor: pointer; font-weight: bold; }
+        
+        nav { background-color: #2b6cb0; padding: 12px 20px; }
+        nav a { color: white; text-decoration: none; margin-right: 20px; font-weight: bold; font-size: 15px; }
+
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
+        .welcome-banner { background: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px; margin-bottom: 25px; border-radius: 4px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; border-top: 4px solid #3182ce; }
+        .card h2 { font-size: 20px; color: #2c5282; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+        .card ul { list-style: none; }
+        .card li { margin-bottom: 12px; border-bottom: 1px dashed #edf2f7; padding-bottom: 8px; }
+        .card a { color: #2d3748; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .card a:hover { color: #e53e3e; text-decoration: underline; }
+        
+        .badge { background: #e53e3e; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold; margin-left: 5px; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; background: #1a365d; color: white; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dforms803</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search Form, Job, Result...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="admin.html" style="color: #feb2b2;">+ Admin Panel</a>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-banner">
+            <h2>Welcome to Dforms803</h2>
+            <p>Aapke sabhi Government Forms, Applications aur Recruitment updates ek hi jagah.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Latest Forms</h2>
+                <ul id="latest-list">
+                    <li><a href="form-details.html">SSC CGL Recruitment Application 2026</a> <span class="badge">NEW</span></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Admit Cards</h2>
+                <ul id="admit-list">
+                    <li><a href="#">NTA NEET UG Hall Ticket 2026</a> <span class="badge">NEW</span></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Results</h2>
+                <ul id="result-list">
+                    <li><a href="#">CBSE Class 10th & 12th Board Results</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Dforms803. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function loadPosts() {
+            let posts = JSON.parse(localStorage.getItem('dforms_posts')) || [];
+            
+            posts.reverse().forEach(post => {
+                let li = document.createElement('li');
+                // Target dynamically to detail.html using unique post ID
+                let targetUrl = post.id ? `detail.html?id=${post.id}` : (post.link || '#');
+                li.innerHTML = `<a href="${targetUrl}">${post.title}</a> <span class="badge">NEW</span>`;
+                
+                if (post.category === 'latest') {
+                    document.getElementById('latest-list').prepend(li);
+                } else if (post.category === 'admit') {
+                    document.getElementById('admit-list').prepend(li);
+                } else if (post.category === 'result') {
+                    document.getElementById('result-list').prepend(li);
+                }
+            });
+        }
+
+        window.onload = loadPosts;
+    </script>
+
+</body>
+</html>
