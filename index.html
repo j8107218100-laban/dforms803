@@ -1,109 +1,610 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dforms803 - Latest Online Forms & Notifications</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
-        body { background-color: #f4f7f6; color: #333; }
-        
-        header { background-color: #1a365d; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        header h1 { font-size: 26px; color: #63b3ed; letter-spacing: 1px; }
-        
-        .search-bar { display: flex; gap: 8px; margin-top: 10px; }
-        .search-bar input { padding: 8px 12px; border-radius: 4px; border: 1px solid #ccc; width: 220px; }
-        .search-bar button { padding: 8px 15px; border-radius: 4px; border: none; background-color: #3182ce; color: white; cursor: pointer; font-weight: bold; }
-        
-        nav { background-color: #2b6cb0; padding: 12px 20px; }
-        nav a { color: white; text-decoration: none; margin-right: 20px; font-weight: bold; font-size: 15px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
-        .welcome-banner { background: #ebf8ff; border-left: 5px solid #3182ce; padding: 15px; margin-bottom: 25px; border-radius: 4px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; border-top: 4px solid #3182ce; }
-        .card h2 { font-size: 20px; color: #2c5282; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
-        .card ul { list-style: none; }
-        .card li { margin-bottom: 12px; border-bottom: 1px dashed #edf2f7; padding-bottom: 8px; }
-        .card a { color: #2d3748; text-decoration: none; font-size: 14px; font-weight: 500; }
-        .card a:hover { color: #e53e3e; text-decoration: underline; }
-        
-        .badge { background: #e53e3e; color: white; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold; margin-left: 5px; }
-        footer { text-align: center; padding: 20px; margin-top: 40px; background: #1a365d; color: white; font-size: 14px; }
-    </style>
+<title>Dforms803 - Latest Online Forms & Notifications</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7f6;
+    color:#333;
+}
+
+header{
+    background:#1a365d;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+header h1{
+    font-size:26px;
+    color:#63b3ed;
+    letter-spacing:1px;
+}
+
+.search-bar{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+}
+
+.search-bar input{
+    padding:8px 12px;
+    border-radius:4px;
+    border:1px solid #ccc;
+    width:220px;
+}
+
+.search-bar button{
+    padding:8px 15px;
+    border-radius:4px;
+    border:none;
+    background:#3182ce;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+nav{
+    background:#2b6cb0;
+    padding:12px 20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-right:20px;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.welcome-banner{
+    background:#ebf8ff;
+    border-left:5px solid #3182ce;
+    padding:15px;
+    margin-bottom:25px;
+    border-radius:4px;
+}
+
+.welcome-banner h2{
+    margin-bottom:5px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:8px;
+    box-shadow:0 4px 6px rgba(0,0,0,.05);
+    padding:20px;
+    border-top:4px solid #3182ce;
+}
+
+.card h2{
+    font-size:20px;
+    color:#2c5282;
+    margin-bottom:15px;
+    border-bottom:1px solid #e2e8f0;
+    padding-bottom:8px;
+}
+
+.card ul{
+    list-style:none;
+}
+
+.card li{
+    margin-bottom:12px;
+    border-bottom:1px dashed #edf2f7;
+    padding-bottom:8px;
+}
+
+.card a{
+    color:#2d3748;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+}
+
+.card a:hover{
+    color:#e53e3e;
+    text-decoration:underline;
+}
+
+.badge{
+    background:#e53e3e;
+    color:white;
+    font-size:10px;
+    padding:2px 6px;
+    border-radius:3px;
+    font-weight:bold;
+    margin-left:5px;
+}
+
+.loading{
+    color:#718096;
+    text-align:center;
+    padding:15px;
+}
+
+.empty{
+    color:#718096;
+    text-align:center;
+    padding:15px;
+}
+
+.error{
+    color:#c53030;
+    text-align:center;
+    padding:15px;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+    background:#1a365d;
+    color:white;
+    font-size:14px;
+}
+
+@media(max-width:600px){
+
+    header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search-bar{
+        width:100%;
+    }
+
+    .search-bar input{
+        width:100%;
+    }
+
+    nav a{
+        display:inline-block;
+        margin-bottom:5px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <header>
-        <h1>Dforms803</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Search Form, Job, Result...">
-            <button>Search</button>
-        </div>
-    </header>
+<header>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="admin.html" style="color: #feb2b2;">+ Admin Panel</a>
-    </nav>
+<h1>Dforms803</h1>
 
-    <div class="container">
-        <div class="welcome-banner">
-            <h2>Welcome to Dforms803</h2>
-            <p>Aapke sabhi Government Forms, Applications aur Recruitment updates ek hi jagah.</p>
-        </div>
+<div class="search-bar">
 
-        <div class="grid">
-            <div class="card">
-                <h2>Latest Forms</h2>
-                <ul id="latest-list">
-                    <li><a href="form-details.html">SSC CGL Recruitment Application 2026</a> <span class="badge">NEW</span></li>
-                </ul>
-            </div>
+<input
+type="text"
+id="searchInput"
+placeholder="Search Form, Job, Result...">
 
-            <div class="card">
-                <h2>Admit Cards</h2>
-                <ul id="admit-list">
-                    <li><a href="#">NTA NEET UG Hall Ticket 2026</a> <span class="badge">NEW</span></li>
-                </ul>
-            </div>
+<button onclick="searchPosts()">
+Search
+</button>
 
-            <div class="card">
-                <h2>Results</h2>
-                <ul id="result-list">
-                    <li><a href="#">CBSE Class 10th & 12th Board Results</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <footer>
-        <p>© 2026 Dforms803. All Rights Reserved.</p>
-    </footer>
+</header>
 
-    <script>
-        function loadPosts() {
-            let posts = JSON.parse(localStorage.getItem('dforms_posts')) || [];
-            
-            posts.reverse().forEach(post => {
-                let li = document.createElement('li');
-                // Target dynamically to detail.html using unique post ID
-                let targetUrl = post.id ? `detail.html?id=${post.id}` : (post.link || '#');
-                li.innerHTML = `<a href="${targetUrl}">${post.title}</a> <span class="badge">NEW</span>`;
-                
-                if (post.category === 'latest') {
-                    document.getElementById('latest-list').prepend(li);
-                } else if (post.category === 'admit') {
-                    document.getElementById('admit-list').prepend(li);
-                } else if (post.category === 'result') {
-                    document.getElementById('result-list').prepend(li);
-                }
-            });
+
+<nav>
+
+<a href="index.html">
+Home
+</a>
+
+<a
+href="admin.html"
+style="color:#feb2b2;">
++ Admin Panel
+</a>
+
+</nav>
+
+
+<div class="container">
+
+<div class="welcome-banner">
+
+<h2>Welcome to Dforms803</h2>
+
+<p>
+Aapke sabhi Government Forms, Applications aur Recruitment updates ek hi jagah.
+</p>
+
+</div>
+
+
+<div class="grid">
+
+
+<!-- LATEST -->
+
+<div class="card">
+
+<h2>Latest Forms</h2>
+
+<ul id="latest-list">
+
+<li class="loading">
+Loading...
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- ADMIT -->
+
+<div class="card">
+
+<h2>Admit Cards</h2>
+
+<ul id="admit-list">
+
+<li class="loading">
+Loading...
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- RESULTS -->
+
+<div class="card">
+
+<h2>Results</h2>
+
+<ul id="result-list">
+
+<li class="loading">
+Loading...
+</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<footer>
+
+<p>
+© 2026 Dforms803. All Rights Reserved.
+</p>
+
+</footer>
+
+
+<script>
+
+/* ==================================
+   SUPABASE CONFIG
+================================== */
+
+const SUPABASE_URL =
+"https://" + "dxdhouchxmsibyjrnagq.supabase.co";
+
+const SUPABASE_KEY =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZGhvdWNoeG1zaWJ5anJuYWdxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTE1MTUsImV4cCI6MjEwMjEyNzUxNX0.4nQFAiB2aFPtFKJfgq7LNr20AWEE0knx3BH8r-ljhwc";
+
+const API_URL =
+SUPABASE_URL + "/rest/v1/posts";
+
+
+const headers = {
+
+    "apikey": SUPABASE_KEY,
+
+    "Authorization":
+    "Bearer " + SUPABASE_KEY
+
+};
+
+
+/* ==================================
+   LOAD POSTS
+================================== */
+
+let allPosts = [];
+
+
+async function loadPosts(){
+
+    try{
+
+        const response =
+        await fetch(
+            API_URL +
+            "?select=*&order=created_at.desc",
+            {
+                method:"GET",
+                headers:headers
+            }
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                await response.text()
+            );
+
         }
 
-        window.onload = loadPosts;
-    </script>
+
+        allPosts =
+        await response.json();
+
+
+        displayPosts(allPosts);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        showError();
+
+    }
+
+}
+
+
+/* ==================================
+   DISPLAY POSTS
+================================== */
+
+function displayPosts(posts){
+
+    const latest =
+    document.getElementById("latest-list");
+
+    const admit =
+    document.getElementById("admit-list");
+
+    const result =
+    document.getElementById("result-list");
+
+
+    latest.innerHTML="";
+    admit.innerHTML="";
+    result.innerHTML="";
+
+
+    let latestCount=0;
+    let admitCount=0;
+    let resultCount=0;
+
+
+    posts.forEach(function(post){
+
+        const li =
+        document.createElement("li");
+
+
+        const link =
+        document.createElement("a");
+
+
+        link.href =
+        "detail.html?id=" +
+        encodeURIComponent(post.id);
+
+
+        link.textContent =
+        post.title;
+
+
+        const badge =
+        document.createElement("span");
+
+
+        badge.className="badge";
+
+        badge.textContent="NEW";
+
+
+        li.appendChild(link);
+
+        li.appendChild(
+            document.createTextNode(" ")
+        );
+
+        li.appendChild(badge);
+
+
+        if(post.category==="latest"){
+
+            latest.appendChild(li);
+
+            latestCount++;
+
+        }
+
+        else if(post.category==="admit"){
+
+            admit.appendChild(li);
+
+            admitCount++;
+
+        }
+
+        else if(post.category==="result"){
+
+            result.appendChild(li);
+
+            resultCount++;
+
+        }
+
+    });
+
+
+    if(latestCount===0){
+
+        latest.innerHTML =
+        '<li class="empty">Abhi koi Latest Form nahi hai.</li>';
+
+    }
+
+
+    if(admitCount===0){
+
+        admit.innerHTML =
+        '<li class="empty">Abhi koi Admit Card nahi hai.</li>';
+
+    }
+
+
+    if(resultCount===0){
+
+        result.innerHTML =
+        '<li class="empty">Abhi koi Result nahi hai.</li>';
+
+    }
+
+}
+
+
+/* ==================================
+   SEARCH
+================================== */
+
+function searchPosts(){
+
+    const search =
+    document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    if(search===""){
+
+        displayPosts(allPosts);
+
+        return;
+
+    }
+
+
+    const filtered =
+    allPosts.filter(function(post){
+
+        return (
+
+            (post.title || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (post.category || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (post.qualification || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+    });
+
+
+    displayPosts(filtered);
+
+}
+
+
+document
+.getElementById("searchInput")
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Enter"){
+
+            searchPosts();
+
+        }
+
+    }
+);
+
+
+/* ==================================
+   ERROR
+================================== */
+
+function showError(){
+
+    document
+    .getElementById("latest-list")
+    .innerHTML =
+    '<li class="error">Forms load नहीं हो सके।</li>';
+
+    document
+    .getElementById("admit-list")
+    .innerHTML =
+    '<li class="error">Data load नहीं हो सका।</li>';
+
+    document
+    .getElementById("result-list")
+    .innerHTML =
+    '<li class="error">Data load नहीं हो सका।</li>';
+
+}
+
+
+/* ==================================
+   START
+================================== */
+
+window.onload =
+loadPosts;
+
+</script>
 
 </body>
 </html>
